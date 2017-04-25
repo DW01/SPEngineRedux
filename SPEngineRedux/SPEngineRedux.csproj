@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Definitions\Cell.cs" />
+    <Compile Include="Readers\CellReader.cs" />
     <Compile Include="Utilities\JsonUtilities.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
