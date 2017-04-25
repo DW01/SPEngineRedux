@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SPEngineRedux.Properties
+namespace SPEngineReduxLibrary.Properties
 {
 
 

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-using SPEngineRedux.Utilities;
 
-namespace SPEngineRedux.Definitions
+namespace SPEngineReduxLibrary.Readers
 {
     class Cell
     {
@@ -51,5 +51,51 @@ namespace SPEngineRedux.Definitions
         // Cell statistics. Only useful if IsCellDestructible is 1 or Cell is of tye Unit (2).
         [JsonProperty(PropertyName = "has-stats")]
         public bool CellHasStats { get; set; } // Are we working with Statistics for this Cell? 1 for YES, 2 for NO.
+    }
+
+    public class CellReader
+    {
+        // Open the default Cell Data Bank.
+        public string OpenDefaultCellBank()
+        {
+            string filename = Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank");
+            using (StreamReader data_reader = File.OpenText(filename))
+            {
+                if (File.Exists(filename))
+                {
+                    JObject cells = JObject.Parse(filename);
+                    return (string)cells;
+                }
+                else if (!File.Exists(filename))
+                {
+                    throw new FileNotFoundException("Cannot find default Cell Bank. Make sure it's present in JsonResources.");
+                }
+                else
+                {
+                    throw new IOException("Unknown error opening default Cell Bank.");
+                }
+            }
+        }
+
+        // Open a user-defined Cell Data Bank.
+        public string OpenUserCellBank(string filename)
+        {
+            using (StreamReader data_reader = File.OpenText(filename))
+            {
+                if (File.Exists(filename))
+                {
+                    JObject cells = JObject.Parse(filename);
+                    return (string)cells;
+                }
+                else if (!File.Exists(filename))
+                {
+                    throw new FileNotFoundException("Cannot find Cell Bank. Make sure it's present in JsonResources.");
+                }
+                else
+                {
+                    throw new IOException("Unknown error opening Cell Bank.");
+                }
+            }
+        }
     }
 }

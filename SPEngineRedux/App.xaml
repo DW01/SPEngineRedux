@@ -1,7 +1,7 @@
-﻿<Application x:Class="SPEngineRedux.App"
+﻿<Application x:Class="SPEngineReduxLibrary.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SPEngineRedux"
+             xmlns:local="clr-namespace:SPEngineReduxLibrary"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
