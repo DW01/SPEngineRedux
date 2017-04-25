@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SPEngineRedux"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="ZEJ Statplay Engine" Height="768" Width="1024
+        ">
     <Grid>
-        
+        <TabControl HorizontalAlignment="Left" Height="688" Margin="10,10,0,0" VerticalAlignment="Top" Width="996">
+            <TabItem Header="Grid">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Header="Cells" HorizontalAlignment="Left" Height="316" Margin="770,10,0,0" VerticalAlignment="Top" Width="210">
+                        <ListBox HorizontalAlignment="Left" Height="281" Margin="10,10,0,0" VerticalAlignment="Top" Width="181"/>
+                    </GroupBox>
+                    <GroupBox Header="Units" HorizontalAlignment="Left" Height="319" Margin="770,331,0,0" VerticalAlignment="Top" Width="210">
+                        <ListBox HorizontalAlignment="Left" Height="281" Margin="10,10,0,0" VerticalAlignment="Top" Width="181"/>
+                    </GroupBox>
+                    <GroupBox Header="Grid View" HorizontalAlignment="Left" Height="640" Margin="10,10,0,0" VerticalAlignment="Top" Width="755">
+                        <DataGrid HorizontalAlignment="Left" Height="602" Margin="10,10,0,0" VerticalAlignment="Top" Width="726"/>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Grid Cells">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="14*"/>
+                        <ColumnDefinition Width="515*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <ToolBar Height="24" VerticalAlignment="Top" Margin="0,713,0,0"/>
+
     </Grid>
 </Window>
