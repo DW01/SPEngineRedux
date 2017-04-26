@@ -10,92 +10,97 @@ using System.Threading.Tasks;
 
 namespace SPEngineReduxLibrary.Readers
 {
-    class Cell
+    public class CellBank
     {
-        // Cell attributes.
-        // We have to use properties here because hyphens are illegal in C#.
+        // Cell properties.
+        public string CellName { get; set; } // String. Name of cell, used in Legend Cells and user interface.
+        public string CellID { get; set; }
+        public string Color { get; set; }
+        public int Classification { get; set; }
+        public string Alignment { get; set; }
 
-        // Cell descriptors.
-        [JsonProperty(PropertyName = "cell-name")]
-        public string CellName { get; set; } // Cell name.
 
-        [JsonProperty(PropertyName = "cell-id")]
-        public string CellID { get; set; } // Cell Identifier.
+        public bool DoesCellExist { get; set; }
 
-        [JsonProperty(PropertyName = "color")]
-        public string Color { get; set; } // Cell color, in hexadecimal.
 
-        [JsonProperty(PropertyName = "classification")]
-        public int Classification { get; set; } // Cell classification. 0 for Empty Cells, 1 for Object Cells, 2 for Units.
+        public bool IsCellPassable { get; set; }
+        public bool CanOccupyCell { get; set; }
+        public bool IsCellDestructible { get; set; }
+        public bool BlocksRangedAttacks { get; set; }
 
-        [JsonProperty(PropertyName = "alignment")]
-        public int Alignment { get; set; } // Cell alignment. 0 for Envirnment, 1-9 for Team Alignment.
 
-        // Does the Cell exist?
-        [JsonProperty(PropertyName = "exists")]
-        public bool DoesCellExist { get; set; } // Boolean. No need to explain. Largely used for Void or Invisible cells.
+        public bool CellHasStats { get; set; }
 
-        // Cell traversal properties.
-        [JsonProperty(PropertyName = "passable")]
-        public bool IsCellPassable { get; set; } // Boolean. 0 for no, 1 for yes.
 
-        [JsonProperty(PropertyName = "occupiable")]
-        public bool CanOccupyCell { get; set; } // Can we occupy the Cell? 1 for yes, 0 for no.
+        public int CurrentCellHP { get; set; }
+        public int MaxCellHP { get; set; }
+        public int CurrentCellMP { get; set; }
+        public int MaxCellMP { get; set; }
+        public int ATK { get; set; }
+        public int DEF { get; set; }
+        public int INT { get; set; }
+        public int SPR { get; set; }
+        public float CritChance { get; set; }
+        public float EvadeChance { get; set; }
+        public int Move { get; set; }
+        public int XLevels { get; set; }
+        public int CON { get; set; }
+    }
 
-        [JsonProperty(PropertyName = "destructable")]
-        public bool IsCellDestructible { get; set; } // If the Cell is of type Object, can we destroy it? 1 for YES, 0 for NO.
-
-        [JsonProperty(PropertyName = "block-ranged")]
-        public bool BlocksRangedAttacks { get; set; } // Does the Cell block ranged attacks (Block Property)? 1 for YES, 0 for NO.
-
-        // Cell statistics. Only useful if IsCellDestructible is 1 or Cell is of tye Unit (2).
-        [JsonProperty(PropertyName = "has-stats")]
-        public bool CellHasStats { get; set; } // Are we working with Statistics for this Cell? 1 for YES, 2 for NO.
+    public class RootObject
+    {
+        public List<CellBank> CellBank { get; set; }
     }
 
     public class CellReader
     {
         // Open the default Cell Data Bank.
-        public string OpenDefaultCellBank()
+        public void OpenDefaultCellBank()
         {
-            string filename = Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank");
-            using (StreamReader data_reader = File.OpenText(filename))
+            try
             {
-                if (File.Exists(filename))
-                {
-                    JObject cells = JObject.Parse(filename);
-                    return (string)cells;
-                }
-                else if (!File.Exists(filename))
-                {
-                    throw new FileNotFoundException("Cannot find default Cell Bank. Make sure it's present in JsonResources.");
-                }
-                else
-                {
-                    throw new IOException("Unknown error opening default Cell Bank.");
-                }
+                JObject DefaultCells = JObject.Parse(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
+            }
+            catch (FileNotFoundException DefaultCellBankMissingException)
+            {
+                throw new FileNotFoundException("Cannot find default Cell Bank. Make sure it's present in JsonResources.", DefaultCellBankMissingException);
+            }
+            catch (DirectoryNotFoundException JsonResourcesMissingException)
+            {
+                throw new DirectoryNotFoundException("Can't access the JsonResources directory. Has it been moved or deleted?", JsonResourcesMissingException);
+            }
+            catch (Exception ex)
+            {
+                throw new IOException("Unknown error opening default Cell Bank.", ex);
             }
         }
 
-        // Open a user-defined Cell Data Bank.
-        public string OpenUserCellBank(string filename)
+        // Print Cells out.
+        public void PrintCellsToConsole()
         {
-            using (StreamReader data_reader = File.OpenText(filename))
+            try
             {
-                if (File.Exists(filename))
+                dynamic DefaultCells = JsonConvert.DeserializeObject(File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank")));
+
+                foreach (var Cell in DefaultCells.CellBank)
                 {
-                    JObject cells = JObject.Parse(filename);
-                    return (string)cells;
+                    Console.WriteLine("Identifier: ", Cell.CellID, Environment.NewLine);
                 }
-                else if (!File.Exists(filename))
-                {
-                    throw new FileNotFoundException("Cannot find Cell Bank. Make sure it's present in JsonResources.");
-                }
-                else
-                {
-                    throw new IOException("Unknown error opening Cell Bank.");
-                }
+
             }
+            catch (FileNotFoundException DefaultCellBankMissingException)
+            {
+                throw new FileNotFoundException("Cannot find default Cell Bank. Make sure it's present in JsonResources.", DefaultCellBankMissingException);
+            }
+            catch (DirectoryNotFoundException JsonResourcesMissingException)
+            {
+                throw new DirectoryNotFoundException("Can't access the JsonResources directory. Has it been moved or deleted?", JsonResourcesMissingException);
+            }
+            catch (Exception ex)
+            {
+                throw new IOException("Unknown error opening default Cell Bank.", ex);
+            }
+
         }
     }
 }

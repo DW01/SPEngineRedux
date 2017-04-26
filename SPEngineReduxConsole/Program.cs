@@ -12,8 +12,8 @@ namespace SPEngineReduxConsole
         static void Main(string[] args)
         {
             SPEngineReduxLibrary.Readers.CellReader cellreader = new SPEngineReduxLibrary.Readers.CellReader();
-            cellreader.OpenDefaultCellBank();
-            Console.WriteLine(cellreader);
+            cellreader.PrintCellsToConsole();
+            Console.ReadLine();
         }
     }
 }

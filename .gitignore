@@ -259,3 +259,14 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Build
+/Build/SPEngineReduxLibrary.dll
+/Build/SPEngineReduxConsole.exe.config
+/Build/SPEngineReduxConsole.exe
+/Build/SPEngineRedux.exe.config
+/Build/SPEngineRedux.exe
+/Build/Newtonsoft.Json.xml
+/Build/Newtonsoft.Json.dll
+/Build/JsonResources/DefaultCells.bank
+/Build/JsonResources
+/Build
