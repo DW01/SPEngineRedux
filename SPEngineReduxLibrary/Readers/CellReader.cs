@@ -6,7 +6,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Collections;
 
 namespace SPEngineReduxLibrary.Readers
 {
@@ -76,17 +76,17 @@ namespace SPEngineReduxLibrary.Readers
         }
 
         // Print Cells out.
-        public void PrintCellsToConsole()
+        public void PrintCellToConsole()
         {
             try
             {
-                dynamic DefaultCells = JsonConvert.DeserializeObject(File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank")));
+                string JsonData = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
 
-                foreach (var Cell in DefaultCells.CellBank)
+                JArray AttributeList = JArray.Parse(JsonData);
+                foreach (JToken CellName in AttributeList.Children())
                 {
-                    Console.WriteLine("Identifier: ", Cell.CellID, Environment.NewLine);
+                    // Fix this nonsense later.
                 }
-
             }
             catch (FileNotFoundException DefaultCellBankMissingException)
             {

@@ -12,7 +12,7 @@ namespace SPEngineReduxConsole
         static void Main(string[] args)
         {
             SPEngineReduxLibrary.Readers.CellReader cellreader = new SPEngineReduxLibrary.Readers.CellReader();
-            cellreader.PrintCellsToConsole();
+            cellreader.PrintCellToConsole();
             Console.ReadLine();
         }
     }

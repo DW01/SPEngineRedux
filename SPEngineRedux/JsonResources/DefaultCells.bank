@@ -1,5 +1,4 @@
-{
-  "CellBank": [
+[
     {
       "CellName": "Empty Cell",
       "CellID": " ",
@@ -155,5 +154,4 @@
       "CON": 6
     },
     null
-  ]
-}
+]
