@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPEngineReduxUI", "SPEngine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPEngineReduxLibrary", "SPEngineReduxLibrary\SPEngineReduxLibrary.csproj", "{8A11D15B-E717-4189-9B81-F68A96F86A1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPEngineReduxConsole", "SPEngineReduxConsole\SPEngineReduxConsole.csproj", "{05B11F6E-C7EA-490C-AB9D-6A4E4E9A497B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPEngineDefaultCellTester", "SPEngineReduxConsole\SPEngineDefaultCellTester.csproj", "{05B11F6E-C7EA-490C-AB9D-6A4E4E9A497B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

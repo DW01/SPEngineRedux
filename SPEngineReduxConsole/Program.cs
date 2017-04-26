@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SPEngineReduxConsole
+namespace SPEngineReduxDefaultCellTester
 {
     class Program
     {
         static void Main(string[] args)
         {
             SPEngineReduxLibrary.Readers.CellReader cellreader = new SPEngineReduxLibrary.Readers.CellReader();
-            cellreader.PrintCellToConsole();
+            cellreader.PrintCellsToConsole();
             Console.ReadLine();
         }
     }

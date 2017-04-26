@@ -76,16 +76,16 @@ namespace SPEngineReduxLibrary.Readers
         }
 
         // Print Cells out.
-        public void PrintCellToConsole()
+        public void PrintCellsToConsole()
         {
             try
             {
-                string JsonData = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
+                var JsonData = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
 
                 JArray AttributeList = JArray.Parse(JsonData);
-                foreach (var CellName in AttributeList.Children())
+                foreach (JObject CellType in AttributeList.Children())
                 {
-                    Console.WriteLine("CellType: {0}\n", CellName.ToString());
+                    Console.WriteLine("Found Cell \"{0}\" with Identifier \"{1}\" and hexcode \"{2}\".\n", CellType["CellName"].ToString(), CellType["CellID"].ToString(), CellType["Color"].ToString());
                 }
             }
             catch (FileNotFoundException DefaultCellBankMissingException)

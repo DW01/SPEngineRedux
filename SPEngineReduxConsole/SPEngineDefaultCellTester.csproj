@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{05B11F6E-C7EA-490C-AB9D-6A4E4E9A497B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SPEngineReduxConsole</RootNamespace>
-    <AssemblyName>SPEngineReduxConsole</AssemblyName>
+    <RootNamespace>SPEngineReduxDefaultCellTester</RootNamespace>
+    <AssemblyName>SPEngineReduxDefaultCellTester</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
