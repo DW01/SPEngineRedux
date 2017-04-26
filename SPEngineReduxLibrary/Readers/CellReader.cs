@@ -83,9 +83,9 @@ namespace SPEngineReduxLibrary.Readers
                 string JsonData = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
 
                 JArray AttributeList = JArray.Parse(JsonData);
-                foreach (JToken CellName in AttributeList.Children())
+                foreach (var CellName in AttributeList.Children())
                 {
-                    // Fix this nonsense later.
+                    Console.WriteLine("CellType: {0}\n", CellName.ToString());
                 }
             }
             catch (FileNotFoundException DefaultCellBankMissingException)
