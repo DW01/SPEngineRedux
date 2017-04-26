@@ -59,7 +59,8 @@ namespace SPEngineReduxLibrary.Readers
         {
             try
             {
-                JObject DefaultCells = JObject.Parse(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
+                var JsonData = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
+                JArray DefaultCells = JArray.Parse(JsonData);
             }
             catch (FileNotFoundException DefaultCellBankMissingException)
             {
