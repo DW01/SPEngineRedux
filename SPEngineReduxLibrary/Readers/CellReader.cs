@@ -86,7 +86,17 @@ namespace SPEngineReduxLibrary.Readers
                 JArray AttributeList = JArray.Parse(JsonData);
                 foreach (JObject CellType in AttributeList.Children())
                 {
-                    Console.WriteLine("Found Cell \"{0}\" with Identifier \"{1}\" and hexcode \"{2}\".\n", CellType["CellName"].ToString(), CellType["CellID"].ToString(), CellType["Color"].ToString());
+                    bool HasStats = CellType.Value<bool>("CellHasStats");
+                    if (HasStats == false)
+                    {
+                        Console.WriteLine("Found Cell \"{0}\" with Identifier \"{1}\" and hexcode \"{2}\".", CellType["CellName"].ToString(), CellType["CellID"].ToString(), CellType["Color"].ToString());
+                        Console.WriteLine("Given Cell does not use statistics (CellHasStats is {0}).\n", CellType["CellHasStats"].ToString());
+                    }
+                    else
+                    {
+                        Console.WriteLine("Found Cell \"{0}\" with Identifier \"{1}\" and hexcode \"{2}\".", CellType["CellName"].ToString(), CellType["CellID"].ToString(), CellType["Color"].ToString());
+                        Console.WriteLine("Given Cell uses statistics (CellHasStats is {0}).\n", CellType["CellHasStats"].ToString());
+                    }
                 }
             }
             catch (FileNotFoundException DefaultCellBankMissingException)
