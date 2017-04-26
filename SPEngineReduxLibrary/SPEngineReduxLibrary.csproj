@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Readers\ReaderBase.cs" />
     <Compile Include="Readers\CellReader.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -52,15 +52,16 @@ namespace SPEngineReduxLibrary.Readers
         public List<CellBank> CellBank { get; set; }
     }
 
-    public class CellReader
+    public class CellReader : ReaderBase
     {
         // Open the default Cell Data Bank.
+        string DefaultCellBank = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
+
         public void OpenDefaultCellBank()
         {
             try
             {
-                var JsonData = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
-                JArray DefaultCells = JArray.Parse(JsonData);
+                var AttributeList = ReadJsonAsArray(DefaultCellBank);
             }
             catch (FileNotFoundException DefaultCellBankMissingException)
             {
@@ -81,9 +82,7 @@ namespace SPEngineReduxLibrary.Readers
         {
             try
             {
-                var JsonData = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
-
-                JArray AttributeList = JArray.Parse(JsonData);
+                var AttributeList = ReadJsonAsArray(DefaultCellBank);
                 foreach (JObject CellType in AttributeList.Children())
                 {
                     bool HasStats = CellType.Value<bool>("CellHasStats");
