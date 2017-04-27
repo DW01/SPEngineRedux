@@ -16,5 +16,12 @@ namespace SPEngineReduxLibrary.Readers
             JArray JsonArray = JArray.Parse(JsonData);
             return JsonArray;
         }
+
+        // Read an individual JObject.
+        public JObject ReadJsonObject(string JsonData)
+        {
+            JObject JsonObject = JObject.Parse(JsonData);
+            return JsonObject;
+        }
     }
 }
