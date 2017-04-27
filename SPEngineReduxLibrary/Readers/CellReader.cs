@@ -61,7 +61,7 @@ namespace SPEngineReduxLibrary.Readers
         {
             try
             {
-                var AttributeList = ReadJsonAsArray(DefaultCellBank);
+                var AttributeList = ReadJsonArray(DefaultCellBank);
             }
             catch (FileNotFoundException DefaultCellBankMissingException)
             {
@@ -82,7 +82,7 @@ namespace SPEngineReduxLibrary.Readers
         {
             try
             {
-                var AttributeList = ReadJsonAsArray(DefaultCellBank);
+                var AttributeList = ReadJsonArray(DefaultCellBank);
                 foreach (JObject CellType in AttributeList.Children())
                 {
                     bool HasStats = CellType.Value<bool>("CellHasStats");

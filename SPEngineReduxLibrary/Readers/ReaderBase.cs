@@ -11,7 +11,7 @@ namespace SPEngineReduxLibrary.Readers
     public class ReaderBase
     {
         // JSON Array reader.
-        public JArray ReadJsonAsArray(string JsonData)
+        public JArray ReadJsonArray(string JsonData)
         {
             JArray JsonArray = JArray.Parse(JsonData);
             return JsonArray;
