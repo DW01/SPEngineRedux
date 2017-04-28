@@ -62,6 +62,28 @@ namespace SPEngineReduxLibrary.Readers
             try
             {
                 var AttributeList = ReadJsonArray(DefaultCellBank);
+                CellBank DefaultCells = new CellBank();
+
+                // Try to set fields in CellBank per Cell.
+                foreach (JObject CellType in AttributeList.Children())
+                {
+                    // Typecast all bool "strings" back to bools.
+                    bool DoesCellExist = CellType.Value<bool>("DoesCellExist");
+                    bool IsCellPassable = CellType.Value<bool>("IsCellPassable");
+                    bool CanOccupyCell = CellType.Value<bool>("CanOccupyCell");
+                    bool IsCellDestructible = CellType.Value<bool>("IsCellDestructible");
+                    bool BlocksRangedAttacks = CellType.Value<bool>("BlocksRangedAttacks");
+                    bool CellHasStats = CellType.Value<bool>("CellHasStats");
+
+                    // Check if the Cell exists before doing anything else!
+                    if (DoesCellExist == true)
+                    {
+                        foreach (JToken CellName in AttributeList.Children())
+                        {
+                            DefaultCells.CellName = CellType["CellName"].ToString();
+                        }
+                    }
+                }
             }
             catch (FileNotFoundException DefaultCellBankMissingException)
             {
@@ -85,8 +107,8 @@ namespace SPEngineReduxLibrary.Readers
                 var AttributeList = ReadJsonArray(DefaultCellBank);
                 foreach (JObject CellType in AttributeList.Children())
                 {
-                    bool HasStats = CellType.Value<bool>("CellHasStats");
-                    if (HasStats == false)
+                    bool CellHasStats = CellType.Value<bool>("CellHasStats");
+                    if (CellHasStats == false)
                     {
                         Console.WriteLine("Found Cell \"{0}\" with Identifier \"{1}\" and hexcode \"{2}\".", CellType["CellName"].ToString(), CellType["CellID"].ToString(), CellType["Color"].ToString());
                         Console.WriteLine("Given Cell does not use statistics (CellHasStats is {0}).\n", CellType["CellHasStats"].ToString());
