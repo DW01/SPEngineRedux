@@ -62,12 +62,14 @@ namespace SPEngineReduxLibrary.Readers
             try
             {
                 var AttributeList = ReadJsonArray(DefaultCellBank);
-                Cell cell = new Cell();
                 CellBank StockCellBank = new CellBank();
 
                 // Try to set fields in CellBank per Cell.
                 foreach (JObject CellType in AttributeList.Children())
                 {
+                    // For every Cell Type, make a new Cell object.
+                    Cell cell = new Cell();
+
                     // Typecast all bool "strings" back to bools.
                     bool DoesCellExist = CellType.Value<bool>("DoesCellExist");
                     bool IsCellPassable = CellType.Value<bool>("IsCellPassable");
