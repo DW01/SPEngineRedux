@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace SPEngineReduxLibrary.Readers
 {
-    public class CellBank
+    public class Cell
     {
         // Cell properties.
         public string CellName { get; set; } // String. Name of cell, used in Legend Cells and user interface.
@@ -47,9 +47,9 @@ namespace SPEngineReduxLibrary.Readers
         public int CON { get; set; }
     }
 
-    public class RootObject
+    public class CellBank
     {
-        public List<CellBank> CellBank { get; set; }
+        public List<Cell> Cells { get; set; }
     }
 
     public class CellReader : ReaderBase
@@ -62,7 +62,8 @@ namespace SPEngineReduxLibrary.Readers
             try
             {
                 var AttributeList = ReadJsonArray(DefaultCellBank);
-                CellBank DefaultCells = new CellBank();
+                Cell cell = new Cell();
+                CellBank StockCellBank = new CellBank();
 
                 // Try to set fields in CellBank per Cell.
                 foreach (JObject CellType in AttributeList.Children())
@@ -76,11 +77,12 @@ namespace SPEngineReduxLibrary.Readers
                     bool CellHasStats = CellType.Value<bool>("CellHasStats");
 
                     // Check if the Cell exists before doing anything else!
-                    if (DoesCellExist == true)
+                    if (CellType != null)
                     {
+                        // Add Cells to bank for each cell name.
                         foreach (JToken CellName in AttributeList.Children())
                         {
-                            DefaultCells.CellName = CellType["CellName"].ToString();
+                            StockCellBank.Cells.Add(cell);
                         }
                     }
                 }
