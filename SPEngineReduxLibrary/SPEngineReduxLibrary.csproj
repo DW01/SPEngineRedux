@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readers\ReaderBase.cs" />
     <Compile Include="Readers\CellReader.cs" />
+    <Compile Include="Readers\TeamReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

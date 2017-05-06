@@ -57,12 +57,12 @@ namespace SPEngineReduxLibrary.Readers
         // Open the default Cell Data Bank.
         string DefaultCellBank = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "JsonResources/DefaultCells.bank"));
 
-        public void OpenDefaultCellBank()
+        public void OpenDefaultCellBank(CellBank bankDefault)
         {
             try
             {
                 var AttributeList = ReadJsonArray(DefaultCellBank);
-                CellBank StockCellBank = new CellBank();
+                bankDefault = new CellBank();
 
                 // Try to set fields in CellBank per Cell.
                 foreach (JObject CellType in AttributeList.Children())
@@ -84,7 +84,7 @@ namespace SPEngineReduxLibrary.Readers
                         // Add Cells to bank for each cell name.
                         foreach (JToken CellName in AttributeList.Children())
                         {
-                            StockCellBank.Cells.Add(cell);
+                            bankDefault.Cells.Add(cell);
                         }
                     }
                 }
